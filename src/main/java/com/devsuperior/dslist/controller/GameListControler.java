@@ -2,6 +2,7 @@ package com.devsuperior.dslist.controller;
 
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameListDTO;
+import com.devsuperior.dslist.dto.GameMinDTO;
 import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.services.GameListService;
 import com.devsuperior.dslist.services.GameService;
@@ -18,9 +19,16 @@ import java.util.List;
 public class GameListControler {
     @Autowired
     private GameListService gameListService;
+    @Autowired
+    private GameService gameService;
 
     @GetMapping
     public List<GameListDTO> findAll() {
         return gameListService.findAll();
+    };
+
+    @GetMapping(value = "/{listId}/games")
+    public List<GameMinDTO> findByList(Long listId) {
+        return gameService.findByList(listId);
     };
 }
